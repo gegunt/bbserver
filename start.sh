@@ -10,4 +10,4 @@ fi
 FORGE_JAR="forge-${MC_VERSION}-${FORGE_VERSION}.jar"
 
 
-exec java -Xmx${MEMORY:-2G} -Xms${MEMORY:-2G} -jar "$FORGE_JAR" nogui
+exec java -Xmx${MEMORY:-8G} -Xms${MEMORY:-4G} -jar "$FORGE_JAR" nogui

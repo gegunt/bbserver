@@ -1,17 +1,17 @@
 FROM openjdk:25-jdk-slim
 
 ENV MC_VERSION=1.20.1
-ENV FORGE_VERSION=47.1.44
+ENV FORGE_VERSION=47.4.1
 ENV FORGE_INSTALLER=forge-${MC_VERSION}-${FORGE_VERSION}-installer.jar
 ENV FORGE_JAR=forge-${MC_VERSION}-${FORGE_VERSION}.jar
 
 WORKDIR /minecraft
 
-# Установить curl и unzip
-RUN apt-get update && apt-get install -y curl unzip && rm -rf /var/lib/apt/lists/*
+# Установить curl, wget и unzip
+RUN apt-get update && apt-get install -y curl wget unzip && rm -rf /var/lib/apt/lists/*
 
 # Скачать Forge installer
-RUN curl -O https://maven.minecraftforge.net/net/minecraftforge/forge/${MC_VERSION}-${FORGE_VERSION}/${FORGE_INSTALLER}
+RUN wget https://maven.minecraftforge.net/net/minecraftforge/forge/${MC_VERSION}-${FORGE_VERSION}/${FORGE_INSTALLER}
 
 # Установить сервер
 RUN java -jar ${FORGE_INSTALLER} --installServer

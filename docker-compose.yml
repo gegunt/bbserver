@@ -27,4 +27,5 @@ services:
     volumes:
       # attach the relative directory 'data' to the container's /data path
       - data:/data
+      - modpacks:/modpacks
     restart: on-failure:3

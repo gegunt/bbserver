@@ -29,3 +29,7 @@ services:
       - data:/data
       - modpacks:/modpacks
     restart: on-failure:3
+
+volumes:
+  data:
+  modpacks:

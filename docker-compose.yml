@@ -1,35 +1,13 @@
-version: "3.8"
+version: '3.8'
 
 services:
   minecraft:
-    image: itzg/minecraft-server
-    tty: true
-    stdin_open: true
+    build: .
+    container_name: forge-minecraft
     ports:
       - "25565:25565"
-    environment:
-      # The type of server to use chosen from: https://docker-minecraft-server.readthedocs.io/en/latest/types-and-platforms/
-      TYPE: "AUTO_CURSEFORGE"
-      # The Curse Forge Developer Console API key to use type AUTO_CURSEFORGE. Escape $ symbols with an additional $
-      CF_API_KEY: "$$2a$$10$$EME4IFxhNsQ3qBagn/DkSO.oRX4wAFAHMgaohmhO34MX.1dKNCAWK"
-      # The Curse Forge URL of the modpack to use. Add the verion URL of the specific version at the end to pin the modpack version
-      CF_PAGE_URL: "https://www.curseforge.com/minecraft/modpacks/minecraft-concerts-events/download/4955064"
-      CF_MODPACK_ZIP: modpacks/BirdBone-0.1.zip
-      # Java memory heap size
-      MEMORY: "4G"
-      # Set this to allow Minecraft to access more RAM for world generation
-      # if you keep getting stuck at "Preparing spawn area"
-      MAX_MEMORY: "8G"
-      # The Version Minecraft Server to run
-      VERSION: "1.20.1"
-      # Accept the End User License Agreement
-      EULA: "TRUE"
     volumes:
-      # attach the relative directory 'data' to the container's /data path
-      - data:/data
-      - modpacks:/modpacks
-    restart: on-failure:3
-
-volumes:
-  data:
-  modpacks:
+      - ./mods:/minecraft/mods
+      - ./config:/minecraft/config
+      - ./world:/minecraft/world
+    restart: unless-stopped
